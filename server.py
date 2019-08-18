@@ -24,32 +24,7 @@ from rx.scheduler import NewThreadScheduler
 from mido.sockets import PortServer
 
 from gfx import UpLine, LeftLine, RightLine, DownLine, Point, Up, Down, Left, Right
-from mapping import standard_mapping
-
-
-def randomize(_):
-    dir = random.choice(['up', 'down', 'left', 'right', 'upline', 'downline', 'rightline', 'leftline'])
-    rand_pos = random.randint(0,7)
-    if dir == 'up':
-        return Up(Point(rand_pos, 7))
-    elif dir == 'down':
-        return Down(Point(rand_pos, 0))
-    elif dir == 'left':
-        return Left(Point(7, rand_pos))
-    elif dir == 'right':
-        return Right(Point(0, rand_pos))
-    elif dir == 'downline':
-        x_pos = random.randint(0,5)
-        return DownLine(x_pos, x_pos + 2, 0)
-    elif dir == 'upline':
-        x_pos = random.randint(0,5)
-        return UpLine(x_pos, x_pos + 2, 7)
-    elif dir == 'rightline':
-        y_pos = random.randint(0,5)
-        return RightLine(0, y_pos, y_pos + 2)
-    elif dir == 'leftline':
-        y_pos = random.randint(0,5)
-        return LeftLine(7, y_pos, y_pos + 2)
+from mapping import standard_mapping, randomize
 
 
 class Server(object):
@@ -100,5 +75,5 @@ class Server(object):
 
 
 if __name__ == '__main__':
-    server = Server(sys.argv[1], int(sys.argv[2]), randomize)
+    server = Server(sys.argv[1], int(sys.argv[2]), standard_mapping)
     server.run()
