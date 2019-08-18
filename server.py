@@ -11,6 +11,7 @@ Clk -> Pin 23
 import time
 import sys
 import random
+import traceback
 import rx
 import rx.operators as ops
 
@@ -23,6 +24,7 @@ from rx.scheduler import NewThreadScheduler
 from mido.sockets import PortServer
 
 from gfx import UpLine, LeftLine, RightLine, DownLine, Point, Up, Down, Left, Right
+from mapping import standard_mapping
 
 
 def randomize(_):
@@ -65,9 +67,9 @@ class Server(object):
 
         self._subscription = rx.create(self._receive).pipe(
             ops.subscribe_on(NewThreadScheduler()),
-            ops.filter(lambda note: note is not None),
-            ops.map(lambda note: self._mapper(note))
-        ).subscribe(lambda note: self._entities.append(note))
+            ops.map(lambda note: self._mapper(note)),
+            ops.filter(lambda gfx: gfx is not None),
+        ).subscribe(lambda gfx: self._entities.append(gfx))
 
 
         print('Start')
@@ -89,6 +91,7 @@ class Server(object):
                 for msg in client:
                     observable.on_next(msg.note)
             except Exception as exp:
+                traceback.print_exc()
                 print('Connection Closed')
 
 

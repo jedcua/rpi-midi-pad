@@ -11,3 +11,7 @@ notes_to_entity = {
     69 : lambda _ : Down(Point(6,0)),
     70 : lambda _ : Down(Point(7,0)),
 }
+
+
+def standard_mapping(note):
+    return notes_to_entity.get(note, lambda _: None)(None)
