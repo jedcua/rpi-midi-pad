@@ -147,6 +147,48 @@ class DownLine(BasicEntity):
         return self._pos1[1] > 7
 
 
+class LeftLine(BasicEntity):
+    def __init__(self, x, y1, y2):
+        self._pos1 = (x, y1)
+        self._pos2 = (x, y2)
+
+
+    def render(self, draw):
+        draw.line([self._pos1, self._pos2], fill='white')
+
+
+    def update(self):
+        x, y1 = self._pos1
+        x, y2 = self._pos2
+        self._pos1 = (x - 1, y1)
+        self._pos2 = (x - 1, y2)
+
+
+    def can_destroy(self):
+        return self._pos1[0] < 0
+
+
+class RightLine(BasicEntity):
+    def __init__(self, x, y1, y2):
+        self._pos1 = (x, y1)
+        self._pos2 = (x, y2)
+
+
+    def render(self, draw):
+        draw.line([self._pos1, self._pos2], fill='white')
+
+
+    def update(self):
+        x, y1 = self._pos1
+        x, y2 = self._pos2
+        self._pos1 = (x + 1, y1)
+        self._pos2 = (x + 1, y2)
+
+
+    def can_destroy(self):
+        return self._pos1[0] > 7
+
+
 class UpLine(BasicEntity):
     def __init__(self, x1, x2, y):
         self._pos1 = (x1, y)
