@@ -76,5 +76,5 @@ class Server(object):
 
 
 if __name__ == '__main__':
-    server = Server(sys.argv[1], int(sys.argv[2]), randomize)
+    server = Server(sys.argv[1], int(sys.argv[2]), standard_mapping)
     server.run()
