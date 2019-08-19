@@ -14,6 +14,7 @@ import random
 import traceback
 import rx
 import rx.operators as ops
+import socket_fix
 
 from luma.core.interface.serial import spi, noop
 from luma.core.render import canvas
@@ -75,5 +76,5 @@ class Server(object):
 
 
 if __name__ == '__main__':
-    server = Server(sys.argv[1], int(sys.argv[2]), standard_mapping)
+    server = Server(sys.argv[1], int(sys.argv[2]), randomize)
     server.run()
