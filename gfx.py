@@ -107,6 +107,30 @@ class Right(BasicEntity):
         return self._origin.can_destroy()
 
 
+class Slow(BasicEntity):
+    def __init__(self, entity, decrement=0.5):
+        self._origin = entity
+        self._decrement = decrement
+        self._counter = 0
+
+
+    def render(self, draw):
+        self._origin.render(draw)
+
+
+    def update(self):
+        if self._counter == 0:
+            self._origin.update()
+            self._counter = 1
+        else:
+            self._counter -= self._decrement
+            self._counter = max(0, self._counter)
+
+
+    def can_destroy(self):
+        return self._origin.can_destroy()
+
+
 class Point(BasicEntity):
     def __init__(self, x, y):
         self._pos = (x, y)

@@ -1,6 +1,6 @@
 import random
 
-from gfx import Down, Right, Up, Left, Point, DownLine, RightLine, LeftLine, UpLine
+from gfx import Down, Right, Up, Left, Point, DownLine, RightLine, LeftLine, UpLine, Slow
 
 
 gfx_dict = {
@@ -43,6 +43,16 @@ gfx_dict = {
     29 : lambda _ : Left(Point(7,5)),
     30 : lambda _ : Left(Point(7,6)),
     31 : lambda _ : Left(Point(7,7)),
+
+    # Slow Down Points
+    32 : lambda _ : Slow(Down(Point(0,0))),
+    33 : lambda _ : Slow(Down(Point(1,0))),
+    34 : lambda _ : Slow(Down(Point(2,0))),
+    35 : lambda _ : Slow(Down(Point(3,0))),
+    36 : lambda _ : Slow(Down(Point(4,0))),
+    37 : lambda _ : Slow(Down(Point(5,0))),
+    38 : lambda _ : Slow(Down(Point(6,0))),
+    39 : lambda _ : Slow(Down(Point(7,0))),
 }
 
 
