@@ -74,14 +74,10 @@ def randomize(_):
     elif dir == 'right':
         return Right(Point(0, rand_pos))
     elif dir == 'downline':
-        x_pos = random.randint(0,5)
-        return DownLine(x_pos, x_pos + 2, 0)
+        return DownLine(0, 7, 0)
     elif dir == 'upline':
-        x_pos = random.randint(0,5)
-        return UpLine(x_pos, x_pos + 2, 7)
+        return UpLine(0, 7, 7)
     elif dir == 'rightline':
-        y_pos = random.randint(0,5)
-        return RightLine(0, y_pos, y_pos + 2)
+        return RightLine(0, 0, 7)
     elif dir == 'leftline':
-        y_pos = random.randint(0,5)
-        return LeftLine(7, y_pos, y_pos + 2)
+        return LeftLine(7, 0, 7)
