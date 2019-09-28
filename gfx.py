@@ -131,6 +131,26 @@ class Slow(BasicEntity):
         return self._origin.can_destroy()
 
 
+class Persist(BasicEntity):
+    def __init__(self, entity, ticks=8):
+        self._origin = entity
+        self._ticks = ticks
+        self._counter = 0
+
+
+    def render(self, draw):
+        self._origin.render(draw)
+
+
+    def update(self):
+        self._origin.update()
+        self._counter += 1
+
+
+    def can_destroy(self):
+        return self._counter > self._ticks
+
+
 class Point(BasicEntity):
     def __init__(self, x, y):
         self._pos = (x, y)
