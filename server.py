@@ -25,7 +25,7 @@ from rx.scheduler import NewThreadScheduler
 from mido.sockets import PortServer
 
 from gfx import UpLine, LeftLine, RightLine, DownLine, Point, Up, Down, Left, Right
-from mapping import standard_mapping, randomize
+from mapping import standard_mapping, randomize, randomize_persist
 
 
 class Server(object):
@@ -43,7 +43,7 @@ class Server(object):
 
         self._subscription = rx.create(self._receive).pipe(
             ops.subscribe_on(NewThreadScheduler()),
-            ops.map(lambda note: self._mapper(note)),
+            ops.map(lambda msg: self._mapper(msg)),
             ops.filter(lambda gfx: gfx is not None),
         ).subscribe(lambda gfx: self._entities.append(gfx))
 
@@ -65,7 +65,7 @@ class Server(object):
                 client = self._server.accept()
                 print('Connected from {}'.format(client))
                 for msg in client:
-                    observable.on_next(msg.note)
+                    observable.on_next(msg)
             except Exception as exp:
                 traceback.print_exc()
                 print('Connection Closed')

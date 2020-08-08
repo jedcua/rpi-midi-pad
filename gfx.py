@@ -252,3 +252,22 @@ class Group(BasicEntity):
 
     def can_destroy(self):
         return all(map(lambda d: d.can_destroy()))
+
+
+class Persist(BasicEntity):
+    def __init__(self, entity, live_cycle=10):
+        self._entity = entity
+        self._live_cycle = live_cycle
+
+
+    def render(self, draw):
+        self._entity.render(draw)
+
+
+    def update(self):
+        self._live_cycle -= 1
+        self._entity.update()
+
+
+    def can_destroy(self):
+        return self._live_cycle <= 0
