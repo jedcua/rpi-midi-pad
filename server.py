@@ -30,7 +30,7 @@ from mapping import standard_mapping, randomize
 
 class Server(object):
     def __init__(self, host, port, note_mapper):
-        serial = spi(port=0, device=0, gpio=noop())
+        serial = spi(port=0, device=0, gpio=noop(), cs_high=True)
         device = max7219(serial)
         self._virtual = viewport(device, width=8, height=8)
         self._entities = blist([])
